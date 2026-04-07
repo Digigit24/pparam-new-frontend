@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pparam Architecture & Interior — Client Project Report</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --ink:#1a1a1a; --muted:#6b6b6b; --gold:#c9a35a; --gold-d:#9c7a36;
+    --bg:#faf7f1; --line:#e7e1d2; --accent:#0f3d2e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:#ddd;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{
+    position:relative;width:210mm;height:297mm;background:var(--bg);
+    margin:14px auto;overflow:hidden;page-break-after:always;
+    box-shadow:0 8px 30px rgba(0,0,0,.15);
+  }
+  .page:last-child{page-break-after:auto}
+  .pad{padding:18mm 16mm}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:600;letter-spacing:.3px}
+  h1{font-size:34pt;line-height:1.05;color:var(--accent)}
+  h2{font-size:18pt;color:var(--accent);margin-bottom:6mm}
+  h3{font-size:12pt;color:var(--gold-d);text-transform:uppercase;letter-spacing:2px;margin-bottom:3mm}
+  p{font-size:10.5pt;line-height:1.55;color:#333}
+  .muted{color:var(--muted);font-size:9pt}
+  .rule{height:2px;width:60mm;background:linear-gradient(90deg,var(--gold),transparent);margin:5mm 0 7mm}
+  .corner{position:absolute;width:60mm;height:60mm;border:1px solid var(--gold);opacity:.5}
+  .c-tl{top:8mm;left:8mm;border-right:none;border-bottom:none}
+  .c-br{bottom:8mm;right:8mm;border-left:none;border-top:none}
+  .footer{position:absolute;left:16mm;right:16mm;bottom:10mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--muted);border-top:1px solid var(--line);padding-top:3mm}
+  .badge{display:inline-block;padding:1mm 4mm;border:1px solid var(--gold);color:var(--gold-d);font-size:8pt;letter-spacing:2px;text-transform:uppercase}
+
+  /* Cover */
+  .cover{height:100%;display:flex;flex-direction:column;justify-content:space-between}
+  .cover .hero{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .cover .meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:8mm}
+  .meta .cell{border-left:2px solid var(--gold);padding-left:4mm}
+  .meta .cell b{display:block;font-size:9pt;color:var(--accent)}
+  .meta .cell span{font-size:8.5pt;color:var(--muted)}
+
+  /* Page 2 grid */
+  .grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:8mm}
+  .card{background:#fff;border:1px solid var(--line);border-radius:2mm;padding:6mm;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .stat{display:flex;align-items:baseline;gap:3mm}
+  .stat b{font-size:28pt;color:var(--accent);font-family:Georgia,serif}
+  .stat span{font-size:9pt;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:5mm}
+  ul.clean{list-style:none}
+  ul.clean li{padding:2mm 0;border-bottom:1px dashed var(--line);font-size:10pt;display:flex;justify-content:space-between}
+  ul.clean li:last-child{border:none}
+  ul.clean li i{color:var(--gold-d);font-style:normal}
+
+  /* Tech chips */
+  .chips{display:flex;flex-wrap:wrap;gap:2mm;margin-top:3mm}
+  .chip{font-size:8.5pt;padding:1.5mm 3mm;background:#fff;border:1px solid var(--gold);color:var(--accent);border-radius:20mm}
+
+  /* Page 3 timeline */
+  .timeline{position:relative;margin-top:5mm;padding-left:8mm}
+  .timeline:before{content:"";position:absolute;left:2mm;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),var(--accent))}
+  .tl-item{position:relative;margin-bottom:5mm}
+  .tl-item:before{content:"";position:absolute;left:-7mm;top:1.5mm;width:4mm;height:4mm;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--gold)}
+  .tl-item b{font-size:10.5pt;color:var(--accent)}
+  .tl-item p{font-size:9.5pt;margin-top:1mm}
+
+  table.t{width:100%;border-collapse:collapse;margin-top:3mm}
+  table.t td,table.t th{font-size:9pt;padding:2.2mm 2mm;border-bottom:1px solid var(--line);text-align:left}
+  table.t th{color:var(--accent);text-transform:uppercase;letter-spacing:1px;font-size:8pt}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<section class="page">
+  <div class="corner c-tl"></div>
+  <div class="corner c-br"></div>
+  <div class="pad cover">
+    <div>
+      <span class="badge">Project Delivery Report</span>
+    </div>
+    <div class="hero">
+      <h1>Pparam<br>Architecture<br>& Interior</h1>
+      <div class="rule"></div>
+      <p style="max-width:120mm">A premium, fully responsive website crafted to reflect Pparam's vision of designing
+      timeless spaces — combining elegant typography, immersive motion, and a refined visual identity.</p>
+
+      <!-- decorative SVG -->
+      <svg viewBox="0 0 600 140" width="100%" style="margin-top:10mm">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#c9a35a"/><stop offset="1" stop-color="#0f3d2e"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="110" width="600" height="2" fill="url(#g1)"/>
+        <g fill="none" stroke="#0f3d2e" stroke-width="1.2">
+          <rect x="40"  y="40" width="60" height="70"/>
+          <rect x="110" y="20" width="80" height="90"/>
+          <rect x="200" y="55" width="50" height="55"/>
+          <rect x="260" y="10" width="100" height="100"/>
+          <rect x="370" y="35" width="70" height="75"/>
+          <rect x="450" y="60" width="50" height="50"/>
+          <rect x="510" y="25" width="60" height="85"/>
+        </g>
+        <g fill="#c9a35a">
+          <circle cx="70"  cy="40" r="2"/><circle cx="150" cy="20" r="2"/>
+          <circle cx="225" cy="55" r="2"/><circle cx="310" cy="10" r="2"/>
+          <circle cx="405" cy="35" r="2"/><circle cx="475" cy="60" r="2"/><circle cx="540" cy="25" r="2"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><b>CLIENT</b><span>Pparam Architecture & Interior</span></div>
+      <div class="cell"><b>DELIVERABLE</b><span>Corporate Website (5 Pages)</span></div>
+      <div class="cell"><b>DATE</b><span>April 2026</span></div>
+    </div>
+  </div>
+  <div class="footer"><span>Prepared for the Client</span><span>Page 01 / 03</span></div>
+</section>
+
+<!-- ============ PAGE 2 — WHAT WE BUILT ============ -->
+<section class="page">
+  <div class="pad">
+    <h3>Project Overview</h3>
+    <h2>What We Have Delivered</h2>
+    <div class="rule"></div>
+    <p>We designed and developed a polished, content-rich marketing website that showcases Pparam's
+    architecture and interior portfolio. The site is fully responsive across mobile, tablet and desktop,
+    optimised for performance, and built with modular components so future updates are quick and inexpensive.</p>
+
+    <div class="stats">
+      <div class="card stat"><b>05</b><span>Total Pages<br>Delivered</span></div>
+      <div class="card stat"><b>15+</b><span>Technologies<br>& Libraries</span></div>
+      <div class="card stat"><b>40+</b><span>Custom Visual<br>Assets</span></div>
+      <div class="card stat"><b>100%</b><span>Mobile<br>Responsive</span></div>
+    </div>
+
+    <div class="grid2" style="margin-top:8mm">
+      <div class="card">
+        <h3>Pages Built</h3>
+        <ul class="clean">
+          <li>Home <i>index.html</i></li>
+          <li>About Us <i>about.html</i></li>
+          <li>Services <i>service.html</i></li>
+          <li>Contact <i>contact.html</i></li>
+          <li>Header / Footer (shared) <i>partials</i></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Key Features</h3>
+        <ul class="clean">
+          <li>Animated Hero Sliders <i>Swiper</i></li>
+          <li>Scroll-triggered Motion <i>GSAP</i></li>
+          <li>3D Tilt & Parallax <i>Atropos / Three.js</i></li>
+          <li>Project Filtering Gallery <i>Isotope</i></li>
+          <li>Lightbox Image Viewer <i>Magnific</i></li>
+          <li>AJAX Contact Form <i>jQuery</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bar chart: pages -->
+    <div class="card" style="margin-top:6mm">
+      <h3>Page Composition (Sections per Page)</h3>
+      <svg viewBox="0 0 520 130" width="100%">
+        <g font-family="Helvetica" font-size="9" fill="#6b6b6b">
+          <line x1="50" y1="10"  x2="50" y2="110" stroke="#e7e1d2"/>
+          <line x1="50" y1="110" x2="510" y2="110" stroke="#e7e1d2"/>
+          <!-- bars -->
+          <g>
+            <rect x="80"  y="20"  width="50" height="90" fill="#0f3d2e"/>
+            <rect x="160" y="45"  width="50" height="65" fill="#c9a35a"/>
+            <rect x="240" y="35"  width="50" height="75" fill="#0f3d2e"/>
+            <rect x="320" y="60"  width="50" height="50" fill="#c9a35a"/>
+            <rect x="400" y="70"  width="50" height="40" fill="#0f3d2e"/>
+          </g>
+          <g fill="#1a1a1a" font-size="8" text-anchor="middle">
+            <text x="105" y="124">Home</text>
+            <text x="185" y="124">About</text>
+            <text x="265" y="124">Services</text>
+            <text x="345" y="124">Contact</text>
+            <text x="425" y="124">Shared</text>
+          </g>
+          <g fill="#fff" font-size="9" text-anchor="middle" font-weight="bold">
+            <text x="105" y="38">9</text><text x="185" y="63">7</text>
+            <text x="265" y="53">8</text><text x="345" y="78">5</text>
+            <text x="425" y="88">4</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="footer"><span>Pparam Architecture & Interior — Project Report</span><span>Page 02 / 03</span></div>
+</section>
+
+<!-- ============ PAGE 3 — TECH & TIMELINE ============ -->
+<section class="page">
+  <div class="pad">
+    <h3>Technology Stack</h3>
+    <h2>Tools & Technologies Used</h2>
+    <div class="rule"></div>
+
+    <div class="grid2">
+      <div>
+        <p>The website is built on a modern, lightweight front-end stack — no heavy frameworks —
+        which keeps it fast, SEO friendly, and easy to host anywhere.</p>
+        <div class="chips">
+          <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">SCSS</span>
+          <span class="chip">JavaScript (ES6)</span><span class="chip">jQuery</span>
+          <span class="chip">Bootstrap 5</span><span class="chip">GSAP</span>
+          <span class="chip">ScrollTrigger</span><span class="chip">Swiper.js</span>
+          <span class="chip">Three.js</span><span class="chip">Atropos</span>
+          <span class="chip">Isotope</span><span class="chip">Magnific Popup</span>
+          <span class="chip">Split-Type</span><span class="chip">PureCounter</span>
+          <span class="chip">Font Awesome Pro</span><span class="chip">AJAX</span>
+        </div>
+      </div>
+
+      <!-- Donut chart -->
+      <div>
+        <svg viewBox="0 0 200 200" width="100%">
+          <g transform="translate(100,100)">
+            <!-- segments computed: 35 + 25 + 20 + 12 + 8 = 100 -->
+            <circle r="70" fill="none" stroke="#0f3d2e" stroke-width="28"
+                    stroke-dasharray="153.9 439.8" transform="rotate(-90)"/>
+            <circle r="70" fill="none" stroke="#c9a35a" stroke-width="28"
+                    stroke-dasharray="109.95 439.8" stroke-dashoffset="-153.9" transform="rotate(-90)"/>
+            <circle r="70" fill="none" stroke="#9c7a36" stroke-width="28"
+                    stroke-dasharray="87.96 439.8" stroke-dashoffset="-263.85" transform="rotate(-90)"/>
+            <circle r="70" fill="none" stroke="#6b6b6b" stroke-width="28"
+                    stroke-dasharray="52.78 439.8" stroke-dashoffset="-351.81" transform="rotate(-90)"/>
+            <circle r="70" fill="none" stroke="#bcbcbc" stroke-width="28"
+                    stroke-dasharray="35.18 439.8" stroke-dashoffset="-404.59" transform="rotate(-90)"/>
+            <text text-anchor="middle" y="-2" font-size="14" font-family="Georgia" fill="#0f3d2e" font-weight="bold">Effort</text>
+            <text text-anchor="middle" y="14" font-size="9" fill="#6b6b6b">Distribution</text>
+          </g>
+        </svg>
+        <table class="t">
+          <tr><td><span style="display:inline-block;width:8px;height:8px;background:#0f3d2e"></span> Design & UI</td><td>35%</td></tr>
+          <tr><td><span style="display:inline-block;width:8px;height:8px;background:#c9a35a"></span> Front-end Dev</td><td>25%</td></tr>
+          <tr><td><span style="display:inline-block;width:8px;height:8px;background:#9c7a36"></span> Animations</td><td>20%</td></tr>
+          <tr><td><span style="display:inline-block;width:8px;height:8px;background:#6b6b6b"></span> Content & Assets</td><td>12%</td></tr>
+          <tr><td><span style="display:inline-block;width:8px;height:8px;background:#bcbcbc"></span> QA & Testing</td><td>8%</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h3 style="margin-top:8mm">Project Timeline</h3>
+    <div class="timeline">
+      <div class="tl-item"><b>Discovery & Wireframes</b><p>Brand study, competitor research and low-fi wireframes for all 5 pages.</p></div>
+      <div class="tl-item"><b>Visual Design</b><p>High-fidelity mockups, typography system, gold-accent identity and asset preparation.</p></div>
+      <div class="tl-item"><b>Development</b><p>Responsive HTML/CSS build, component partials (header, footer), interactions and AJAX form.</p></div>
+      <div class="tl-item"><b>Animations & Polish</b><p>GSAP scroll effects, Swiper sliders, Atropos 3D tilt and Magnific lightbox integration.</p></div>
+      <div class="tl-item"><b>QA & Delivery</b><p>Cross-browser/device testing, performance tuning and final hand-off.</p></div>
+    </div>
+
+    <div class="card" style="margin-top:6mm">
+      <h3>Additional Notes</h3>
+      <p>The codebase is modular and well organised under <i>/assets</i> with separate folders for
+      <b>css</b>, <b>scss</b>, <b>js</b>, <b>images</b>, <b>fonts</b> and third-party <b>vendor</b> libraries.
+      Header and footer are loaded as shared partials, so site-wide updates take only one edit.
+      The project is ready for deployment on any static host (Netlify, Vercel, GitHub Pages or traditional cPanel).</p>
+    </div>
+  </div>
+  <div class="footer"><span>Thank you — Pparam Architecture & Interior</span><span>Page 03 / 03</span></div>
+</section>
+
+</body>
+</html>
