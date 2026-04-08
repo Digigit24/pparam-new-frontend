@@ -46866,3 +46866,14 @@ a, button, .tp-btn, .al-btn {
 #header-sticky.header-sticky {
     background-color: #ffffff !important;
 }
+
+/* Fix: Offcanvas should be on top of the navbar */
+.tp-offcanvas {
+    z-index: 99999 !important;
+}
+
+.body-overlay {
+    z-index: 99998 !important;
+}
+
+
