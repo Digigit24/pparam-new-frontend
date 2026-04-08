@@ -41448,11 +41448,11 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 }
 
 .al-service-archi-wrapper:hover .al-service-archi-icon {
-    color: var(--tp-theme-secondary);
+    color: var(--color-primary);
 }
 
 .al-service-archi-wrapper:hover .al-service-archi-link {
-    color: var(--tp-theme-secondary);
+    color: var(--color-primary);
 }
 
 .al-service-archi-title {
@@ -41461,8 +41461,9 @@ only screen and (min-width: 768px) and (max-width: 991px) {
     margin-bottom: 15px;
 }
 
-.al-service-archi-title a:hover {
-    color: var(--tp-theme-secondary);
+.al-service-archi-title a:hover,
+.al-service-archi-wrapper:hover .al-service-archi-title a {
+    color: var(--color-primary);
 }
 
 .al-service-archi-link {
@@ -46706,7 +46707,7 @@ div[class*="-area"]:nth-of-type(even) {
 
 .al-service-archi-wrapper:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-    border-color: var(--tp-theme-secondary);
+    border-color: var(--color-primary);
     transform: translateY(-5px);
 }
 
