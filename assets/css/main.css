@@ -46835,3 +46835,34 @@ a, button, .tp-btn, .al-btn {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
+
+/* Navbar Global White Background Fix */
+#header-sticky.tp-header-area {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Ensure text remains visible on white background */
+.al-header-archi .tp-main-menu nav > ul > li > a,
+.al-header-archi .tp-header-btn a,
+.al-header-archi .tp-header-right,
+.al-header-archi .tp-header-right a {
+    color: #111111 !important;
+}
+
+.al-header-archi .tp-main-menu nav > ul > li > a span {
+    color: #111111 !important;
+}
+
+/* Make hamburger menu lines dark */
+.al-header-archi .tp-menu-bar span {
+    background-color: #111111 !important;
+}
+
+
+
+/* Header Sticky specifically */
+#header-sticky.header-sticky {
+    background-color: #ffffff !important;
+}

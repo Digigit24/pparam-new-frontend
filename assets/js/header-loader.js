@@ -43,9 +43,59 @@
         // We'll trust the user to put the loader script with the right path.
 
         container.outerHTML = content;
+
+        // Initialize Scroll-based Visibility Logic
+        initNavbarScrollVisibility();
       }
     } catch (e) {
       console.error("Failed to load header:", e);
+    }
+  }
+
+  function initNavbarScrollVisibility() {
+    const header = document.getElementById("header-sticky");
+    if (!header) return;
+
+    let lastScrollTop = 0;
+    let isTicking = false;
+    const threshold = 100; // Start hiding after 100px scroll
+    const delta = 5; // Minimum scroll distance to trigger
+
+    // Apply smooth transition style via JS to avoid CSS modification
+    header.style.transition = "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+
+    window.addEventListener("scroll", function () {
+      if (!isTicking) {
+        window.requestAnimationFrame(function () {
+          updateNavbarVisibility();
+          isTicking = false;
+        });
+        isTicking = true;
+      }
+    }, { passive: true });
+
+    function updateNavbarVisibility() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Ensure visible at the top
+      if (scrollTop <= threshold) {
+        header.style.transform = "translateY(0)";
+        lastScrollTop = scrollTop;
+        return;
+      }
+
+      // Check if scroll is significant enough
+      if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
+
+      if (scrollTop > lastScrollTop) {
+        // Scrolling Down - Hide
+        header.style.transform = "translateY(-100%)";
+      } else {
+        // Scrolling Up - Show
+        header.style.transform = "translateY(0)";
+      }
+
+      lastScrollTop = scrollTop;
     }
   }
 })();
