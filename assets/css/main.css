@@ -4820,124 +4820,10 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 /*----------------------------------------*/
 
-/*  2.9 Preloader
-/*----------------------------------------*/
+/*  2.9 Preloader Removed */
+.loader-wrap { display: none !important; }
 
-body.loaded {
-    overflow-x: hidden !important;
-    width: 100%;
-}
 
-.loader-wrap {
-    position: fixed;
-    z-index: 999;
-    height: 100vh;
-    width: 100%;
-    left: 0;
-    top: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    overflow: hidden;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    background: transparent;
-    z-index: 99999999999999;
-}
-
-.loader-wrap svg {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 110vh;
-    fill: #121212;
-}
-
-.loader-wrap .loader-wrap-heading .load-text {
-    font-size: 62px;
-    font-weight: 500;
-    letter-spacing: 0px;
-    text-transform: uppercase;
-    z-index: 20;
-    font-family: var(--tp-ff-heading);
-    color: var(--tp-common-white);
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px),
-only screen and (min-width: 768px) and (max-width: 991px) {
-    .loader-wrap .loader-wrap-heading .load-text {
-        font-size: 40px;
-    }
-}
-
-@media only screen and (min-width: 576px) and (max-width: 767px),
-(max-width: 574.98px) {
-    .loader-wrap .loader-wrap-heading .load-text {
-        font-size: 20px;
-    }
-}
-
-.load-text span {
-    -webkit-animation: loading 1s infinite alternate;
-    animation: loading 1s infinite alternate;
-}
-
-.load-text span:nth-child(1) {
-    -webkit-animation-delay: 0s;
-    animation-delay: 0s;
-}
-
-.load-text span:nth-child(2) {
-    -webkit-animation-delay: 0.1s;
-    animation-delay: 0.1s;
-}
-
-.load-text span:nth-child(3) {
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-}
-
-.load-text span:nth-child(4) {
-    -webkit-animation-delay: 0.3s;
-    animation-delay: 0.3s;
-}
-
-.load-text span:nth-child(5) {
-    -webkit-animation-delay: 0.4s;
-    animation-delay: 0.4s;
-}
-
-.load-text span:nth-child(6) {
-    -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s;
-}
-
-.load-text span:nth-child(7) {
-    -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-}
-
-@-webkit-keyframes loading {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes loading {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
 
 .containers {
     position: inherit;
@@ -41590,6 +41476,17 @@ only screen and (min-width: 768px) and (max-width: 991px) {
     -ms-transition: all 0.3s 0s ease-out;
     -o-transition: all 0.3s 0s ease-out;
     transition: all 0.3s 0s ease-out;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.al-service-archi-icon i {
+    display: inline-block;
+}
+
+.al-service-archi-content {
+    padding-left: 10px;
+    padding-right: 20px;
 }
 
 .al-service-archi-content p {
@@ -46571,7 +46468,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 /*# sourceMappingURL=main.css.map */
 
 /*--------------------------------------------------------------
-# ARCHITECTURE SECTION CUSTOM FIXES
+# Architect SECTION CUSTOM FIXES
 --------------------------------------------------------------*/
 .al-about-archi-area .al-about-archi-content-wrapper {
     max-width: 100%;
@@ -46682,7 +46579,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 
 
-/* Scoped Architecture Section Fixes */
+/* Scoped Architect Section Fixes */
 .al-about-archi-area .al-about-archi-content-wrapper,
 .al-fact-archi-area .al-fact-archi-wrapper {
     max-width: 100%;
@@ -46697,6 +46594,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 .al-about-archi-area, 
 .al-fact-archi-area, 
 .al-project-archi-area, 
+.al-service-archi-area,
 .al-choose-archi-area {
     overflow: visible;
 }
@@ -46725,7 +46623,7 @@ only screen and (min-width: 576px) and (max-width: 767px) {
 
 
 /* ==========================================================================
-   PP-ARAM BRAND RECOLORING (Architecture & Interior Design)
+   PP-ARAM BRAND RECOLORING (Architect & Interior Design)
    ========================================================================== */
 
 /* 1. Global Backgrounds and Typography */
@@ -46795,8 +46693,24 @@ div[class*="-area"]:nth-of-type(even) {
 }
 
 /* 5. Cards and Content Blocks */
+.al-service-archi-wrapper {
+    padding: 45px 35px;
+    background-color: var(--tp-common-white);
+    border: 1px solid rgba(28, 29, 33, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.al-service-archi-wrapper:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    border-color: var(--tp-theme-secondary);
+    transform: translateY(-5px);
+}
+
 .tp-service-sa-item,
-.al-service-archi-wrapper,
 .al-project-archi-wrapper,
 .tp-service-cst-content,
 .tp-bg-common-white,

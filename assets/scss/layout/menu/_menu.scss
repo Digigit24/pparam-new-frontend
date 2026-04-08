@@ -235,12 +235,14 @@
 	right: 0;
 	opacity: 1;
 	width: 100%;
-	z-index: 10;
+	z-index: 1001;
 	visibility: visible;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 6px 0 rgba(19, 19, 22, 0.08);
-	animation: 0.95s ease 0s normal forwards 1 running headerSlideDown;
-	-webkit-animation: 0.95s ease 0s normal forwards 1 running headerSlideDown;
+    background: transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+	animation: 0.4s ease 0s normal forwards 1 running headerSlideDown;
+	-webkit-animation: 0.4s ease 0s normal forwards 1 running headerSlideDown;
     & .tp-header-menu > nav > ul > li > a {
         padding: 22px 0;
     }
