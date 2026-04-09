@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Force HTTPS and www
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^pparamarchitect\.com [NC]
+RewriteRule ^(.*)$ https://www.pparamarchitect.com/$1 [L,R=301]
